@@ -5,7 +5,8 @@ app.use(cors());
 
 const { userJoin, getUsers, userLeave } = require("./utils/user");
 
-const app = express();
+const app = express();   // ✅ define app first
+app.use(cors());  
 const server = http.createServer(app);
 const socketIO = require("socket.io");
 const io = require("socket.io")(server, {

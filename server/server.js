@@ -1,12 +1,20 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
+app.use(cors());
+
 const { userJoin, getUsers, userLeave } = require("./utils/user");
 
 const app = express();
 const server = http.createServer(app);
 const socketIO = require("socket.io");
-const io = socketIO(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
 
 app.use(cors());
 app.use((req, res, next) => {
@@ -61,8 +69,9 @@ io.on("connection", (socket) => {
 });
 
 // serve on port
+
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () =>
-  console.log(`server is listening on http://localhost:${PORT}`)
-);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

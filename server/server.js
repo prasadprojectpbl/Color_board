@@ -1,3 +1,6 @@
+console.log("SERVER FILE STARTED");
+console.log("About to start server...");
+
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
@@ -74,6 +77,7 @@ io.on("connection", (socket) => {
 
 // PORT (Render requires this)
 const PORT = process.env.PORT || 5000;
+console.log("About to start server...");
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
